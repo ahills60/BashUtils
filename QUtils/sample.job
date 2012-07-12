@@ -1,0 +1,7 @@
+# This is a sample job file. Comments can be written
+# in the header of the file. Special commands to the
+# Queue Manager are written as follows:
+#$ email=a.hills@sheffield.ac.uk
+#$ notify=3
+
+echo "Hello world"

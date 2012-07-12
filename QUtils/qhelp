@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+# General help file
+#
+
+echo ' '
+echo "***************************************************"
+echo "*           HELP FOR THE QUEUING SYSTEM           *"
+echo "***************************************************"
+echo "* Commands:                                       *"
+echo "*                                                 *"
+echo "* createjob - Creates a job file using a wizard   *"
+echo "*             You can specify two arguments:      *"
+echo "*             Argument 1: Matlab m-file           *"
+echo "*             Argument 2: Output job file         *"
+echo "*             e.g. createjob test.m myjob.job     *"
+echo "*                                                 *"
+echo "* submitjob - Submits the job file (as given by   *"
+echo "*             the first argument) to the Queue    *"
+echo "*             e.g. submitjob myjob.job            *"
+echo "*                                                 *"
+echo "*     qlist - View the state of the queue manager *"
+echo "*                                                 *"
+echo "***************************************************"
+echo ' '

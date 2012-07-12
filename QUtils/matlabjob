@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# For running matlab jobs
+#
+help()
+{
+echo ' Usage:     matlabjob matlab_script_file [output_file] '
+echo ' '
+echo '   This command runs the MATLAB script file in'
+echo '   non-interactive, non-graphical mode'
+echo ' '
+echo '    if the output_file is not specified, output is directed to stdout'
+}
+if test -z "$1"
+then
+    help
+    exit 1
+else
+    if test -f "$1"
+    then
+        if test -z "$2"
+	then
+	    matlab -nojvm -nosplash -nodisplay < "$1"
+	else
+	    matlab -nojvm -nosplash -nodisplay < "$1" > "$2"
+	fi
+    else
+        echo "$1" "is not a file"
+    fi
+fi
+    

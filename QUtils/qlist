@@ -1,0 +1,43 @@
+#!/bin/bash
+#
+# This returns the list of jobs
+#
+# Version: 0.1 (27th October 2007)
+#  Author: Andrew Hills (a.hills@sheffield.ac.uk)
+#
+
+queueman=`ps -A | grep queueman`
+# Check to see if there's something in this variable. If not,
+# then the queue manager is not operational
+
+currJob=`head -1 "${QUEUEPATH}"contents.txt`
+
+echo ' '
+
+if [[ ! -z $queueman ]]
+then
+	echo "The Queue Manager is currently active."
+	if [[ -z $currJob ]]
+	then
+		echo "No jobs are currently in the queue"
+	else
+		echo "Job processing should be job ${currJob%%.job}"
+	fi
+else
+	echo "The Queue Manager is currently inactive."
+	if [[ -z $currJob ]]
+	then
+		echo "No jobs are currently in the queue"
+	else
+		echo "When activated, the queue manager should process job ${currJob%%.job}"
+	fi
+fi
+
+# Now give entire list of jobs to user providing there are jobs
+echo ' '
+if [[ ! -z $currJob ]]
+then
+	echo "Received job files:"
+	echo `cat "${QUEUEPATH}"contents.txt | sed 's/.job//g'`
+	echo ' '
+fi

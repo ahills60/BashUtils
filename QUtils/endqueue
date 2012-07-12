@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# This script creates an "quit.job" file to stop the
+# queue manager from operating
+#
+# Version: 1.0 (24th October 2007)
+#  Author: Andrew Hills (a.hills@sheffield.ac.uk
+#
+
+echo '  Creating quit job file. The Queue Manager will'
+echo '  terminate once the current job finishes'
+> ${QUEUEPATH}quit.job
