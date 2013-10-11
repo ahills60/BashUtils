@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="BashUtils : Useful BASH scripts" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>BashUtils</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/ahills60/BashUtils">View on GitHub</a>
+
+          <h1 id="project_title">BashUtils</h1>
+          <h2 id="project_tagline">Useful BASH scripts</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/ahills60/BashUtils/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/ahills60/BashUtils/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="bashutils" class="anchor" href="#bashutils"><span class="octicon octicon-link"></span></a>BashUtils</h1>
+
+<p>BashUtils provides useful scripts for the Bourne Again Shell (BASH) including basic job queuing. BASH is supported by a various operating systems and is the default shell for Ubuntu and Mac OS X amongst other operating systems.</p>
+
+<h2>
+<a name="libraries" class="anchor" href="#libraries"><span class="octicon octicon-link"></span></a>Libraries</h2>
+
+<p>BashUtils currently consists of two libraries:</p>
+
+<ul>
+<li>
+<code>Iceberg Rewrites</code> for scripts related to the University of Sheffield's <a href="http://www.sheffield.ac.uk/wrgrid/">HPC service</a>.</li>
+<li>
+<code>QUtils</code> which provides rudimentary job queue management.</li>
+</ul><h3>
+<a name="iceberg-rewrites" class="anchor" href="#iceberg-rewrites"><span class="octicon octicon-link"></span></a>Iceberg Rewrites</h3>
+
+<p>Two scripts within <code>Iceberg Rewrites</code> enable the submission of Python scripts to the <a href="http://en.wikipedia.org/wiki/Oracle_Grid_Engine">SGE</a> on Iceberg:</p>
+
+<ul>
+<li>
+<code>pythonjob</code> runs a set of Python instructions and can take screen output if requested. This command is used by <code>qpy</code>.</li>
+<li>
+<code>qpy</code> submits Python jobs to the SGE in an interactive fashion. This avoids having to write <code>qsub</code> commands yourself.</li>
+</ul><p>The Python scripts require Python to be installed and available within the <code>PATH</code>. The scripts should be placed in <code>~/bin/pythonjob</code>.</p>
+
+<p>A third file <code>runmat</code> is a replacement of the <code>runmatlab</code> script on iceberg. The script <code>runmat</code> provides additional functionality such as support for project names and email notification. This script may now be obsolete as the Iceberg admins have rewritten a few of their submission scripts.</p>
+
+<h3>
+<a name="qutils" class="anchor" href="#qutils"><span class="octicon octicon-link"></span></a>QUtils</h3>
+
+<p>QUtils provides basis queue functionality on systems that support BASH. Several files are included:</p>
+
+<ul>
+<li>
+<code>queueman</code> is the main script that acts as a queue manager. This script looks for new job files, parses the script file for notification information and sends email on job start and/or completion.</li>
+<li>
+<code>createjob</code> provides an interactive method for creating job scripts. The script can quickly accept and process MATLAB files but can accept other script files.</li>
+<li>
+<code>submitjob</code> submits a job script file created by <code>createjob</code> to the queue for processing.</li>
+<li>
+<code>qlist</code> displays the outstanding queue items and the item in the queue that currently being processed.</li>
+<li>
+<code>matlabjob</code> is a shortcut method for running MATLAB scripts in a non-interactive, non-graphical environment and optionally outputting stdout to a file. </li>
+<li>
+<code>endqueue</code> allows the owner of the queue manager to stop the queue process.</li>
+<li>
+<code>qhelp</code> writes basic help information to the screen.</li>
+</ul><p>In addition to the above, the script files need to be accessible to all users that will be using QUtils (i.e. add the location of these files to the <code>PATH</code> and adjust permissions to executable). Additionally, job files will need to be stored in a location that's accessible to everyone and this should should be stored in a variable <code>QUEUEPATH</code>. The these variables can be defined in the <code>~/.bashrc</code> file using:</p>
+
+<div class="highlight highlight-bash"><pre><span class="c"># Define QUEUEPATH:</span>
+<span class="nb">export </span><span class="nv">QUEUEPATH</span><span class="o">=</span><span class="s2">"/home/Queue/Queue/"</span>
+<span class="c"># Add QUtils to path:</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"$PATH:/home/Queue/QUtils"</span>
+</pre></div>
+
+<p>The variable updates need defining for all users who are to use QUtils. If all users are to use QUtils, then making changes to the global <code>bashrc</code> file (located in <code>/etc/</code>) is recommended. </p>
+
+<p>QUtils can be initiated through a Terminal window (or SSH session). I recommend using <code>screen</code> to keep the queue running in the background without having to keep Terminal windows (or SSH sessions) open. To start the queue manager, run <code>queueman</code>.</p>
+
+<p>Emailing is performed with the <a href="http://caspian.dotconf.net/menu/Software/SendEmail/">sendEmail</a> program available for Linux and Windows.</p>
+
+<p><em>Note: A rather (unnecessarily) lengthy version of the development of this can be found on <a href="http://andrew-hills.blogspot.co.uk/2008/02/simple-bash-based-queue-system.html">my blog</a>. Writing styles change in time and so I may get around to rewriting the post in the future.</em></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">BashUtils maintained by <a href="https://github.com/ahills60">ahills60</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
